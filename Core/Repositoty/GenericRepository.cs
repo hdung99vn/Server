@@ -1,11 +1,11 @@
-﻿using Core.Entities;
+﻿using AutoMapper;
+using Core.Entities;
 using Core.IRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Linq.Expressions;
-using System.Text.Json;
 using System.Text;
-using AutoMapper;
+using System.Text.Json;
 
 namespace Core.Repositoty
 {
@@ -18,11 +18,11 @@ namespace Core.Repositoty
         private DistributedCacheEntryOptions options = new DistributedCacheEntryOptions()
                 .SetAbsoluteExpiration(DateTime.Now.AddMinutes(5))
                 .SetSlidingExpiration(TimeSpan.FromMinutes(3));
-        public GenericRepository(DbContext context,IDistributedCache cache, IMapper mapper)
+        public GenericRepository(DbContext context, IDistributedCache cache, IMapper mapper)
         {
             _context = context;
             _entity = context.Set<T>();
-            _cache = cache; 
+            _cache = cache;
             _mapper = mapper;
         }
         public async Task Add(T entity)
@@ -37,7 +37,7 @@ namespace Core.Repositoty
         {
             await _context.BulkInsertAsync(entities);
             await _context.BulkSaveChangesAsync();
-            foreach(var entity in entities)
+            foreach (var entity in entities)
             {
                 var dataToCache = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(entity));
                 await _cache.SetAsync(entity.Id.ToString(), dataToCache, options);
@@ -60,7 +60,7 @@ namespace Core.Repositoty
             var entities = await _entity.Where(x => Ids.Contains(x.Id)).ToListAsync();
             await _context.BulkDeleteAsync<IEnumerable<T?>>(entities);
             await _context.BulkSaveChangesAsync();
-            foreach(var id in Ids)
+            foreach (var id in Ids)
             {
                 await _cache.RemoveAsync(id.ToString());
             }
@@ -73,7 +73,7 @@ namespace Core.Repositoty
 
         public async Task<T> GetById(Guid Id)
         {
-            var data= await _cache.GetAsync(Id.ToString());
+            var data = await _cache.GetAsync(Id.ToString());
             if (data != null)
             {
                 var result = JsonSerializer.Deserialize<T>(data);
@@ -100,7 +100,7 @@ namespace Core.Repositoty
         {
             await _context.BulkUpdateAsync(entities);
             await _context.BulkSaveChangesAsync();
-            foreach(var entity in entities)
+            foreach (var entity in entities)
             {
                 await _cache.RemoveAsync(entity.Id.ToString());
                 var dataToCache = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(entity));

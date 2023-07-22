@@ -3,7 +3,6 @@ using API.IServices;
 using API.Models;
 using AutoMapper;
 using Core.Repositoty;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 
 namespace API.Services
