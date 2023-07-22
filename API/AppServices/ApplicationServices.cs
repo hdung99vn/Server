@@ -2,13 +2,12 @@
 using API.IServices;
 using API.Services;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 
 namespace API.ServiceRegister
 {
     public static class ApplicationServices
     {
-        public static void AddServices(this IServiceCollection services,IConfiguration configuration)
+        public static void AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<ApplicationContext>(options =>
                options.UseSqlServer(
@@ -17,8 +16,9 @@ namespace API.ServiceRegister
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-
-            services.AddTransient<ITodoService,TodoService>();
+            services.AddStackExchangeRedisCache(options => { options.Configuration = configuration.GetConnectionString("RedisConnection"); });
+            services.AddTransient<ITodoService, TodoService>();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
     }
 }

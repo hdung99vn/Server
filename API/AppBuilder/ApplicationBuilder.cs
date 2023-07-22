@@ -1,7 +1,4 @@
-﻿using API.AppContext;
-using System.Configuration;
-
-namespace API.Builder
+﻿namespace API.Builder
 {
     public static class ApplicationBuilder
     {

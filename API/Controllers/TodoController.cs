@@ -1,9 +1,6 @@
 ﻿using API.IServices;
 using API.Models;
-using API.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing.Printing;
 
 namespace API.Controllers
 {
@@ -16,10 +13,17 @@ namespace API.Controllers
         {
             _service = service;
         }
+
         [HttpGet]
         public async Task<IEnumerable<Todo>> Get()
         {
             return await _service.GetAll();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<Todo> Detail(Guid id)
+        {
+            return await _service.GetById(id);
         }
 
         [HttpPost]
