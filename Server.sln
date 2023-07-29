@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IndentityServer", "..\Auth\IndentityServer\IndentityServer.csproj", "{FC1A6B99-478F-4CCE-9D75-AC2546616835}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Auth", "..\Auth\Auth\Auth.csproj", "{872DF8E1-11A2-4BE1-9D74-8C5A07870EF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FC1A6B99-478F-4CCE-9D75-AC2546616835}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC1A6B99-478F-4CCE-9D75-AC2546616835}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC1A6B99-478F-4CCE-9D75-AC2546616835}.Release|Any CPU.Build.0 = Release|Any CPU
+		{872DF8E1-11A2-4BE1-9D74-8C5A07870EF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{872DF8E1-11A2-4BE1-9D74-8C5A07870EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{872DF8E1-11A2-4BE1-9D74-8C5A07870EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{872DF8E1-11A2-4BE1-9D74-8C5A07870EF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
