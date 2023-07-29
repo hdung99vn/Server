@@ -9,5 +9,5 @@ var app = builder.Build();
 
 app.AddBuilder(app.Environment.IsDevelopment());
 //app.MapControllers();
-app.MapControllers().RequireAuthorization("SampleAPI");
+app.MapControllers();//.RequireAuthorization("SampleAPI");
 await app.RunAsync();
